@@ -1,0 +1,18 @@
+# check availability of data for each column of a dataframe
+# dataframes are in a list. check all simultaneously
+# names of the items in the list will finally become an additional column called categorical_var_name
+
+
+# create some data to test code below
+
+
+# count the occurences where column value is either 0 or NA. If either does not have to be counted as unavailable, remove from the which condition. 
+count_values <-  lapply(df_list, function(x) lapply(x, function(x) length(which(x == 0 | is.na(x))) / length(x)))
+
+# make a dataframe of the list of unavailble data from above
+summarize_col <- as.data.frame(do.call("rbind", count_values))
+
+# join with name of dataframes in the list to create a long table. 
+summarize_col_df <- cbind(data.frame(categorical_var_name = row.names(summarize_col)), as.data.frame(sapply(summarize_col, function(x) as.numeric(x))))
+
+remove(summarize_col)
