@@ -5,6 +5,8 @@
 
 ## all the dataframes in the list have the same structure and column names
 
+require(dplyr)
+
 df1 = data.frame(groupvar = c('cat', 'cat', 'dog', 'dog'), var = c(2, 3, 6, 7))
 
 df2 = data.frame(groupvar = c('tiger', 'tiger', 'lion', 'lion'), var = c(4, 5, 8, 9))
@@ -24,3 +26,5 @@ df_summary_list <- lapply(df_list, function(x) {
   
   }
 )
+
+print(df_summary_list)
